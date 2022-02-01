@@ -20,12 +20,12 @@ const Header = () => {
           <Logo />
         </LogoWrapper>
         <DesktopNav>
-          <NavLink href="/sale">Sale</NavLink>
-          <NavLink href="/new">New&nbsp;Releases</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/women">Women</NavLink>
-          <NavLink href="/kids">Kids</NavLink>
-          <NavLink href="/collections">Collections</NavLink>
+          <NavLink href="/sale"><NavSpan data-hover='Sale'>Sale</NavSpan></NavLink>
+          <NavLink href="/sale"><NavSpan data-hover='New&nbsp;Releases'>New&nbsp;Releases</NavSpan></NavLink>
+          <NavLink href="/sale"><NavSpan data-hover='Men'>Men</NavSpan></NavLink>
+          <NavLink href="/sale"><NavSpan data-hover='Women'>Women</NavSpan></NavLink>
+          <NavLink href="/sale"><NavSpan data-hover='Kids'>Kids</NavSpan></NavLink>
+          <NavLink href="/sale"><NavSpan data-hover='Collections'>Collections</NavSpan></NavLink>
         </DesktopNav>
         <MobileActions>
           <ShoppingBagButton>
@@ -120,10 +120,32 @@ const NavLink = styled.a`
   text-decoration: none;
   color: var(--color-gray-900);
   font-weight: ${WEIGHTS.medium};
+  overflow: hidden;
 
   &:first-of-type {
     color: var(--color-secondary);
   }
 `;
+
+const NavSpan = styled.span`
+  display: inline-block;
+  position: relative;
+  transition: transform 500ms;
+
+  &::before  {
+    content:  attr(data-hover);
+    position: absolute;
+    top: 100%;
+    font-weight: ${WEIGHTS.bold};
+  }
+
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    ${NavLink}:hover & {
+      transform: translateY(-100%);
+      transition: transform 250ms;
+    }
+  }
+`
 
 export default Header;
